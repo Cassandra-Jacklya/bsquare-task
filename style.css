@@ -35,4 +35,8 @@ body {
     border-radius: 5px;
     cursor: pointer;
   }
+
+  p {
+    margin: 0;
+  }
   
