@@ -15,6 +15,11 @@ wss.on('connection', (socket) => {
   });
 
   socket.on('close', () => {
+    wss.clients.forEach((client) => {
+      client.readyState = WebSocket.CLOSED;
+      client.send("User has left the chat");
+    });
     console.log('Client disconnected');
+    
   });
 });

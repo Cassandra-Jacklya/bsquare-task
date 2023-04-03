@@ -1,9 +1,16 @@
 const socket = new WebSocket('ws://localhost:8080');
 const chatWindow = document.getElementById('chat-window');
+const messageForm = document.getElementById('message-form');
+const messageInput = document.getElementById('message-input');
 
 socket.addEventListener('open', () => {
   socket.send('New user joined the chat');
 });
+
+// socket.addEventListener('close', () => {
+//   console.log("hi");
+//   socket.send('User left the chat');
+// });
 
 socket.addEventListener('message', (event) => {
   if (event.data instanceof Blob) {
@@ -15,15 +22,6 @@ socket.addEventListener('message', (event) => {
     chatWindow.innerHTML += `<p>${event.data}</p>` ;
   }
 });
-
-socket.addEventListener('close', () => {
-  console.log("here");
-  socket.send('User has left the chat');
-});
-
-
-const messageForm = document.getElementById('message-form');
-const messageInput = document.getElementById('message-input');
 
 messageForm.addEventListener('submit', (event) => {
   event.preventDefault();
